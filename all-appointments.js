@@ -29,7 +29,7 @@ function getAppointments() {
 
   const testRef = db
     .collection("test-appointments")
-    .where(Boolean("patient_uid"));
+    // .where(Boolean("patient_uid"));
   console.log("userrrrrrr", user);
   console.log(firebase.auth().currentUser);
   // testRef = testRef.where("doctor_uid" === )
