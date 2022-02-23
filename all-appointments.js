@@ -27,52 +27,50 @@ function getAppointments() {
     fullname.innerHTML = firstname + " " + lastname;
   }
 
-  const testRef = db
-    .collection("test-appointments")
-    // .where("patient_uid" !== (null | undefined));
   auth.onAuthStateChanged((user) => {
     if (user) {
-      console.log("userrrrrrr", user);
+      let appointmentRef = db
+        .collection("test-appointments")
+        .where("patient_uid", "!==", undefined);
+      appointmentRef = appointmentRef.where("doctor_uid", "==" === user.uid);
+      appointmentRef
+        .get()
+        .then((snapshot) => {
+          let index = 0;
+          snapshot.forEach((doc) => {
+            const appointmenDoc = db
+              .collection("test-patients")
+              .doc(doc.data().patient_uid);
+            appointmenDoc.get().then((appointmentSnapshot) => {
+              appointments.push({
+                id: doc.id,
+                ...doc.data(),
+                ...appointmentSnapshot.data(),
+              });
+              const currentAppointment = {
+                id: doc.id,
+                ...doc.data(),
+                ...appointmentSnapshot.data(),
+              };
+              populate(
+                index,
+                currentAppointment.firstname,
+                currentAppointment.lastname,
+                currentAppointment.profile_image,
+                currentAppointment.id
+              );
+              index++;
+            });
+          });
+          upcoming_appointment_info.setAttribute("style", "display:block");
+          inner_page_loader.setAttribute("style", "display: none");
+        })
+        .catch((error) => {
+          console.log(error);
+          inner_page_loader.setAttribute("style", "display: none");
+        });
     }
   });
-  console.log(firebase.auth().currentUser);
-  // testRef = testRef.where("doctor_uid" === )
-  testRef
-    .get()
-    .then((snapshot) => {
-      let index = 0;
-      snapshot.forEach((doc) => {
-        const appointmenDoc = db
-          .collection("test-patients")
-          .doc(doc.data().patient_uid);
-        appointmenDoc.get().then((appointmentSnapshot) => {
-          appointments.push({
-            id: doc.id,
-            ...doc.data(),
-            ...appointmentSnapshot.data(),
-          });
-          const currentAppointment = {
-            id: doc.id,
-            ...doc.data(),
-            ...appointmentSnapshot.data(),
-          };
-          populate(
-            index,
-            currentAppointment.firstname,
-            currentAppointment.lastname,
-            currentAppointment.profile_image,
-            currentAppointment.id
-          );
-          index++;
-        });
-      });
-      upcoming_appointment_info.setAttribute("style", "display:block");
-      inner_page_loader.setAttribute("style", "display: none");
-    })
-    .catch((error) => {
-      console.log(error);
-      inner_page_loader.setAttribute("style", "display: none");
-    });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
