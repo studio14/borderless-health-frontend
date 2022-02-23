@@ -30,7 +30,11 @@ function getAppointments() {
   const testRef = db
     .collection("test-appointments")
     .where("patient_uid" !== (null | undefined));
-  console.log("userrrrrrr", user);
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      console.log("userrrrrrr", user);
+    }
+  });
   console.log(firebase.auth().currentUser);
   // testRef = testRef.where("doctor_uid" === )
   testRef
