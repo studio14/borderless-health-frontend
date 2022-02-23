@@ -29,7 +29,7 @@ function getAppointments() {
 
   const testRef = db
     .collection("test-appointments")
-    .where("patient_uid" !== (null | undefined));
+    // .where("patient_uid" !== (null | undefined));
   auth.onAuthStateChanged((user) => {
     if (user) {
       console.log("userrrrrrr", user);
