@@ -31,7 +31,7 @@ function getAppointments() {
     if (user) {
       let appointmentRef = db
         .collection("test-appointments")
-        .where("status", "==", true);
+        .where("patient_uid", "!=", null);
       appointmentRef = appointmentRef.where("doctor_uid", "==", user.uid);
       console.log("appointmentRef", appointmentRef);
       appointmentRef
