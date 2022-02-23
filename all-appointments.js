@@ -33,11 +33,13 @@ function getAppointments() {
         .collection("test-appointments")
         .where("patient_uid", "!=", undefined);
       appointmentRef = appointmentRef.where("doctor_uid", "==", user.uid);
+      console.log("appointmentRef", appointmentRef);
       appointmentRef
         .get()
         .then((snapshot) => {
           let index = 0;
           snapshot.forEach((doc) => {
+            console.log("doc.data(appointments)", doc.data());
             const appointmenDoc = db
               .collection("test-patients")
               .doc(doc.data().patient_uid);
