@@ -15,10 +15,20 @@ function getAppointments() {
     var original = document.getElementsByClassName("appointment-container")[0];
     original.setAttribute("style", "display:flex");
     appointments.forEach((appointment, index) => {
-      if (index > 0) {
+      const previousAppointments = document.querySelector(
+        ".previous-appointment-info"
+      );
+      const currentDate = new Date();
+      if (appointment.date.toDate() > currentDate) {
+        if (index > 0) {
+          var clone = original.cloneNode(true); // "deep" clone
+          original.parentNode.appendChild(clone);
+        }
+      } else {
         var clone = original.cloneNode(true); // "deep" clone
-        original.parentNode.appendChild(clone);
+        previousAppointments.appendChild(clone);
       }
+
       const image = document.querySelectorAll(".appointment-container img")[
         index
       ];
