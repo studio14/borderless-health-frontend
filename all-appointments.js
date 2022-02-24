@@ -41,6 +41,7 @@ function getAppointments() {
       emptyAppointment.setAttribute("style", "display:block");
     }
     upcomingAppointments.forEach((appointment, index) => {
+      upcoming_appointment_info.setAttribute("style", "display:block");
       console.log("appointment", appointment);
       if (index > 0) {
         var clone = original.cloneNode(true); // "deep" clone
@@ -121,7 +122,6 @@ function getAppointments() {
               index++;
             });
           });
-          upcoming_appointment_info.setAttribute("style", "display:block");
           inner_page_loader.setAttribute("style", "display: none");
         })
         .catch((error) => {
