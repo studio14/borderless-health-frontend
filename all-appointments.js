@@ -25,8 +25,12 @@ function getAppointments() {
       const fullname = document.querySelectorAll(
         ".appointment-container .heading-5"
       )[index];
+      const day = document.querySelectorAll(".appointment-container .day")[index];
+      const month = document.querySelectorAll(".appointment-container .month")[index];
       const link = document.querySelectorAll(".appointment-container a")[index];
       image.src = appointment.profile_image;
+      month.innerHTML = appointment.date.toDate().substring(0, 3)
+      day.innerHTML = appointment.date.toDate().substring(8, 10)
       link.href = "/appointments/appointment?ap=" + appointment.id;
       fullname.innerHTML = appointment.firstname + " " + appointment.lastname;
     });
@@ -56,11 +60,6 @@ function getAppointments() {
                 ...doc.data(),
                 ...appointmentSnapshot.data(),
               });
-              console.log("to date", appointmentSnapshot.data().dob.toDate());
-              console.log(
-                "to date and to string",
-                appointmentSnapshot.data().dob.toDate().toDateString()
-              );
               if (snapshot.size === index + 1) {
                 populate();
               }
