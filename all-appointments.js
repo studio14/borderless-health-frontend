@@ -64,10 +64,10 @@ function getAppointments() {
                 ...doc.data(),
                 ...appointmentSnapshot.data(),
               });
-              console.log("to date", appointmentSnapshot.data().date.toDate());
+              console.log("to date", doc.data().date.toDate());
               console.log(
                 "to date sunbstr",
-                appointmentSnapshot.data().toDate().date.substring("", 3)
+                doc.data().toDate().date.substring("", 3)
               );
               if (snapshot.size === index + 1) {
                 populate();
