@@ -14,26 +14,62 @@ function getAppointments() {
   function populate() {
     var original = document.getElementsByClassName("appointment-container")[0];
     original.setAttribute("style", "display:flex");
-    const previousAppointments = document.querySelector(
-        ".previous-appointment-info"
+    const previousAppointmentsParent = document.querySelector(
+      ".previous-appointment-info"
+    );
+    const currentDate = new Date();
+
+    let upcomingAppointments = appointments.filter(
+      (ap) => ap.date.toDate() > currentDate
+    );
+    let previousAppointments = appointments.filter(
+      (ap) => ap.date.toDate() < currentDate
+    );
+    if (previousAppointments.length === 0) {
+      const emptyAppointment = document.querySelector(
+        ".upcoming-appointment .no-appointments"
       );
-    appointments.forEach((appointment, index) => {
+      emptyAppointment.setAttribute("style", "display:block");
+    }
+    if (previousAppointments.length === 0) {
+      const emptyAppointment = document.querySelector(
+        ".previous-appointment .no-appointments"
+      );
+      emptyAppointment.setAttribute("style", "display:block");
+    }
+    upcomingAppointments.forEach((appointment, index) => {
       console.log("appointment", appointment);
-      const currentDate = new Date();
-      if (appointment.date.toDate() > currentDate) {
-        if (index > 0) {
-          var clone = original.cloneNode(true); // "deep" clone
-          original.parentNode.appendChild(clone);
-        }
-      } else {
+      if (index > 0) {
         var clone = original.cloneNode(true); // "deep" clone
-        previousAppointments.appendChild(clone);
+        original.parentNode.appendChild(clone);
       }
+      const image = document.querySelectorAll(".appointment-container img")[
+        index
+      ];
+      const fullname = document.querySelectorAll(
+        ".appointment-container .heading-5"
+      )[index];
+      const day = document.querySelectorAll(".appointment-container .day")[
+        index
+      ];
+      const month = document.querySelectorAll(".appointment-container .month")[
+        index
+      ];
+      const link = document.querySelectorAll(".appointment-container a")[index];
+      image.src = appointment.profile_image;
+      month.innerHTML = appointment.date.toDate().toString().substring(4, 7);
+      day.innerHTML = appointment.date.toDate().toString().substring(8, 10);
+      link.href = "/appointments/appointment?ap=" + appointment.id;
+      fullname.innerHTML = appointment.firstname + " " + appointment.lastname;
+    });
+    previousAppointments.forEach((appointment, index) => {
+      console.log("appointment", appointment);
+      var clone = original.cloneNode(true); // "deep" clone
+      previousAppointmentsParent.appendChild(clone);
 
       const image = document.querySelectorAll(".appointment-container img")[
         index
       ];
-      console.log("index: ", index, image);
       const fullname = document.querySelectorAll(
         ".appointment-container .heading-5"
       )[index];
@@ -62,10 +98,6 @@ function getAppointments() {
         .get()
         .then((snapshot) => {
           let index = 0;
-          if (snapshot.size == 0) {
-            const emptyAppointment = document.querySelector(".no-appointments");
-            emptyAppointment.setAttribute("style", "display:block");
-          }
           snapshot.forEach((doc) => {
             const appointmenDoc = db
               .collection("test-patients")
