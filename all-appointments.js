@@ -13,6 +13,9 @@ function getAppointments() {
 
   function populate(index, firstname, lastname, profile_image, id) {
     var original = document.getElementsByClassName("appointment-container")[0];
+    if (index == 0) {
+      original.setAttribute("style", "display:flex");
+    }
     var clone = original.cloneNode(true); // "deep" clone
     original.parentNode.appendChild(clone);
     const image = document.querySelectorAll(".appointment-container img")[
@@ -33,13 +36,12 @@ function getAppointments() {
         .collection("test-appointments")
         .where("patient_uid", "!=", null);
       appointmentRef = appointmentRef.where("doctor_uid", "==", user.uid);
-      console.log("appointmentRef", appointmentRef);
       appointmentRef
         .get()
         .then((snapshot) => {
           let index = 0;
+          console.log("snapshotttt", snapshot);
           snapshot.forEach((doc) => {
-            console.log("doc.data(appointments)", doc.data());
             const appointmenDoc = db
               .collection("test-patients")
               .doc(doc.data().patient_uid);
