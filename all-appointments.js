@@ -32,6 +32,7 @@ function getAppointments() {
       const image = document.querySelectorAll(".appointment-container img")[
         index
       ];
+      console.log("index: ", index, image);
       const fullname = document.querySelectorAll(
         ".appointment-container .heading-5"
       )[index];
