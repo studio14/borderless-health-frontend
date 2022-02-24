@@ -19,10 +19,10 @@ function getAppointments() {
     );
     const currentDate = new Date();
 
-    let upcomingAppointments = appointments.filter(
+    const upcomingAppointments = appointments.filter(
       (ap) => ap.date.toDate() > currentDate
     );
-    let previousAppointments = appointments.filter(
+    const previousAppointments = appointments.filter(
       (ap) => ap.date.toDate() < currentDate
     );
     console.log("upcomingAppointments", upcomingAppointments);
@@ -42,24 +42,23 @@ function getAppointments() {
     }
     upcomingAppointments.forEach((appointment, index) => {
       upcoming_appointment_info.setAttribute("style", "display:block");
-      console.log("appointment", appointment);
       if (index > 0) {
         var clone = original.cloneNode(true); // "deep" clone
         original.parentNode.appendChild(clone);
       }
-      const image = document.querySelectorAll(".appointment-container img")[
+      const image = document.querySelectorAll(".upcoming-appointment .appointment-container img")[
         index
       ];
       const fullname = document.querySelectorAll(
         ".appointment-container .heading-5"
       )[index];
-      const day = document.querySelectorAll(".appointment-container .day")[
+      const day = document.querySelectorAll(".upcoming-appointment .appointment-container .day")[
         index
       ];
-      const month = document.querySelectorAll(".appointment-container .month")[
+      const month = document.querySelectorAll(".upcoming-appointment .appointment-container .month")[
         index
       ];
-      const link = document.querySelectorAll(".appointment-container a")[index];
+      const link = document.querySelectorAll(".upcoming-appointment .appointment-container a")[index];
       image.src = appointment.profile_image;
       month.innerHTML = appointment.date.toDate().toString().substring(4, 7);
       day.innerHTML = appointment.date.toDate().toString().substring(8, 10);
@@ -71,19 +70,19 @@ function getAppointments() {
       var clone = original.cloneNode(true); // "deep" clone
       previousAppointmentsParent.appendChild(clone);
 
-      const image = document.querySelectorAll(".appointment-container img")[
+      const image = document.querySelectorAll(".previous-appointment .appointment-container img")[
         index
       ];
       const fullname = document.querySelectorAll(
         ".appointment-container .heading-5"
       )[index];
-      const day = document.querySelectorAll(".appointment-container .day")[
+      const day = document.querySelectorAll(".previous-appointment .appointment-container .day")[
         index
       ];
-      const month = document.querySelectorAll(".appointment-container .month")[
+      const month = document.querySelectorAll(".previous-appointment .appointment-container .month")[
         index
       ];
-      const link = document.querySelectorAll(".appointment-container a")[index];
+      const link = document.querySelectorAll(".previous-appointment .appointment-container a")[index];
       image.src = appointment.profile_image;
       month.innerHTML = appointment.date.toDate().toString().substring(4, 7);
       day.innerHTML = appointment.date.toDate().toString().substring(8, 10);
