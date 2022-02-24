@@ -42,7 +42,7 @@ function getAppointments() {
           let index = 0;
           console.log("snapshotttt", snapshot.size);
           if (snapshot.size == 0) {
-            const emptyAppointment = document.querySelector(".no-appointment");
+            const emptyAppointment = document.querySelector(".no-appointments");
             emptyAppointment.setAttribute("style", "display:block");
           }
           snapshot.forEach((doc) => {
