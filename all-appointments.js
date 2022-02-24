@@ -59,7 +59,7 @@ function getAppointments() {
               console.log("to date", appointmentSnapshot.data().dob.toDate());
               console.log(
                 "to date and to string",
-                doc.data().dob.toDate().toDateString()
+                appointmentSnapshot.data().dob.toDate().toDateString()
               );
               if (snapshot.size === index + 1) {
                 populate();
