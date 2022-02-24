@@ -30,7 +30,7 @@ const loadAppointment = () => {
         patientData.firstname + " " + patientData.lastname;
       phoneNumber.innerHTML = "Phone No: " + patientData.phone_number;
       profileImg.src = patientData.profile_image;
-      patientData.patient_documents.forEach((doc, index) => {
+      result.patient_documents.forEach((doc, index) => {
         if (index > 0) {
           var clone = documents[0].cloneNode(true); // "deep" clone
           documents[0].parentNode.appendChild(clone);
