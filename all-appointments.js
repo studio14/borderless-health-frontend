@@ -13,7 +13,6 @@ function getAppointments() {
 
   function populate() {
     var original = document.getElementsByClassName("appointment-container")[0];
-    original.setAttribute("style", "display:flex");
     const previousAppointments = document.querySelector(
       ".previous-appointment-info"
     );
@@ -21,6 +20,7 @@ function getAppointments() {
       console.log("appointment", appointment);
       const currentDate = new Date();
       if (appointment.date.toDate() > currentDate) {
+        original.setAttribute("style", "display:flex");
         if (index > 0) {
           var clone = original.cloneNode(true); // "deep" clone
           original.parentNode.appendChild(clone);
