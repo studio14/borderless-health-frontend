@@ -15,8 +15,10 @@ function getAppointments() {
     var original = document.getElementsByClassName("appointment-container")[0];
     original.setAttribute("style", "display:flex");
     appointments.forEach((appointment, index) => {
-      var clone = original.cloneNode(true); // "deep" clone
-      original.parentNode.appendChild(clone);
+      if (index > 0) {
+        var clone = original.cloneNode(true); // "deep" clone
+        original.parentNode.appendChild(clone);
+      }
       const image = document.querySelectorAll(".appointment-container img")[
         index
       ];
