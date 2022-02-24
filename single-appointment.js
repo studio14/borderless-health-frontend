@@ -53,6 +53,12 @@ const loadAppointment = () => {
           if (doc.mimeType !== "application/pdf") {
             document.querySelectorAll(".patient-img-upload img")[0].src =
               doc.url;
+              document
+              .querySelectorAll(".patient-img-upload div")
+              [0].setAttribute(
+                "style",
+                "text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 10ch;"
+              );
             document.querySelectorAll(".patient-img-upload div")[0].innerHTML =
               doc.name;
           }
