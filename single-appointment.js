@@ -3,6 +3,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 // To load appointment
 const loadAppointment = () => {
+  document
+    .querySelector(".appointment-card")
+    .setAttribute("style", "display:none");
+
   const params = new URLSearchParams(location.search);
   const apQuery = params.get("ap");
 
