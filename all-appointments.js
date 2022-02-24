@@ -42,7 +42,6 @@ function getAppointments() {
         .get()
         .then((snapshot) => {
           let index = 0;
-          console.log("snapshotttt", snapshot.size);
           if (snapshot.size == 0) {
             const emptyAppointment = document.querySelector(".no-appointments");
             emptyAppointment.setAttribute("style", "display:block");
@@ -57,18 +56,11 @@ function getAppointments() {
                 ...doc.data(),
                 ...appointmentSnapshot.data(),
               });
-              //   const currentAppointment = {
-              //     id: doc.id,
-              //     ...doc.data(),
-              //     ...appointmentSnapshot.data(),
-              //   };
-              //   populate(
-              //     index,
-              //     currentAppointment.firstname,
-              //     currentAppointment.lastname,
-              //     currentAppointment.profile_image,
-              //     currentAppointment.id
-              //   );
+              console.log("to date", doc.data().dob.toDate());
+              console.log(
+                "to date and to string",
+                doc.data().dob.toDate().toDateString()
+              );
               if (snapshot.size === index + 1) {
                 populate();
               }
