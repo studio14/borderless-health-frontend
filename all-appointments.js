@@ -66,7 +66,7 @@ function getAppointments() {
               });
               console.log(
                 "to date sunbstr",
-                doc.data().date.toString()
+                doc.data().date.toDate().toString()
               );
               if (snapshot.size === index + 1) {
                 populate();
