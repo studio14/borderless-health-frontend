@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
-    loadAppointment();
+document.addEventListener("DOMContentLoaded", function () {
+  loadAppointment();
 });
 // To load appointment
 const loadAppointment = () => {
@@ -34,16 +34,20 @@ const loadAppointment = () => {
         if (index > 0) {
           var clone = documents[0].cloneNode(true); // "deep" clone
           documents[0].parentNode.appendChild(clone);
-          documents[index].setAttribute("omo", "lol");
+          documents[index].setAttribute("href", doc.url);
+          if (doc.mimeType !== "application/pdf") {
+            document.querySelectorAll(".patient-img-upload img")[index].src = doc.url;
+          }
         } else {
-          documents[0].setAttribute("omo", "lol");
+          documents[0].setAttribute("href", doc.url);
+          if (doc.mimeType !== "application/pdf") {
+            document.querySelectorAll(".patient-img-upload img")[0].src = doc.url;
+          }
         }
       });
-      documents
+      document
         .querySelector(".appointment-card")
         .setAttribute("style", "display:block");
     });
   });
 };
-
-
