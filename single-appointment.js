@@ -17,56 +17,62 @@ const loadAppointment = () => {
   appointment.get().then((snapshot) => {
     const result = snapshot.data();
     const patient = db.collection("test-patients").doc(result.patient_uid);
-    patient.get().then((patientSnapshot) => {
-      const patientData = patientSnapshot.data();
-      meetingLink.href = result.meeting_url;
-      meetingLink.innerHTML =
-        result.date.toDate().toLocaleDateString("en-US") +
-        " at " +
-        result.time_from;
-      BackgroundInfo.innerHTML = result.patient_background_info;
-      dob.innerHTML = "DOB: " + patientData.dob.toDate().toDateString();
-      patientName.innerHTML =
-        patientData.firstname + " " + patientData.lastname;
-      phoneNumber.innerHTML = "Phone No: " + patientData.phone_number;
-      profileImg.src = patientData.profile_image;
-      result.patient_documents.forEach((doc, index) => {
-        if (index > 0) {
-          var clone = documents[0].cloneNode(true); // "deep" clone
-          documents[0].parentNode.appendChild(clone);
-          documents[index].setAttribute("href", doc.url);
-          if (doc.mimeType !== "application/pdf") {
-            document.querySelectorAll(".patient-img-upload img")[index].src =
-              doc.url;
-            document
-              .querySelectorAll(".patient-img-upload div")
-              [index].setAttribute(
-                "style",
-                "text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 10ch;"
-              );
-            document.querySelectorAll(".patient-img-upload div")[
-              index
-            ].innerHTML = doc.name;
-          }
-        } else {
-          documents[0].setAttribute("href", doc.url);
-          if (doc.mimeType !== "application/pdf") {
-            document.querySelectorAll(".patient-img-upload img")[0].src =
-              doc.url;
+    patient
+      .get()
+      .then((patientSnapshot) => {
+        const patientData = patientSnapshot.data();
+        meetingLink.href = result.meeting_url;
+        meetingLink.innerHTML =
+          result.date.toDate().toLocaleDateString("en-US") +
+          " at " +
+          result.time_from;
+        BackgroundInfo.innerHTML = result.patient_background_info;
+        dob.innerHTML = "DOB: " + patientData.dob.toDate().toDateString();
+        patientName.innerHTML =
+          patientData.firstname + " " + patientData.lastname;
+        phoneNumber.innerHTML = "Phone No: " + patientData.phone_number;
+        profileImg.src = patientData.profile_image;
+        result.patient_documents.forEach((doc, index) => {
+          if (index > 0) {
+            var clone = documents[0].cloneNode(true); // "deep" clone
+            documents[0].parentNode.appendChild(clone);
+            documents[index].setAttribute("href", doc.url);
+            if (doc.mimeType !== "application/pdf") {
+              document.querySelectorAll(".patient-img-upload img")[index].src =
+                doc.url;
               document
-              .querySelectorAll(".patient-img-upload div")
-              [0].setAttribute(
-                "style",
-                "text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 10ch;"
-              );
-            document.querySelectorAll(".patient-img-upload div")[0].innerHTML =
-              doc.name;
+                .querySelectorAll(".patient-img-upload div")
+                [index].setAttribute(
+                  "style",
+                  "text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 10ch;"
+                );
+              document.querySelectorAll(".patient-img-upload div")[
+                index
+              ].innerHTML = doc.name;
+            }
+          } else {
+            documents[0].setAttribute("href", doc.url);
+            if (doc.mimeType !== "application/pdf") {
+              document.querySelectorAll(".patient-img-upload img")[0].src =
+                doc.url;
+              document
+                .querySelectorAll(".patient-img-upload div")[0]
+                .setAttribute(
+                  "style",
+                  "text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 10ch;"
+                );
+              document.querySelectorAll(
+                ".patient-img-upload div"
+              )[0].innerHTML = doc.name;
+            }
           }
-        }
+        });
+        document
+          .querySelector(".appointment-card")
+          .setAttribute("style", "display:block");
+      })
+      .catch((error) => {
+        console.log("error: ", error);
       });
-      document
-        .querySelector(".appointment-card")
-        .setAttribute("style", "display:block");
-    });
   });
 };
