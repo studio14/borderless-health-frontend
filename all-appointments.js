@@ -67,7 +67,7 @@ function getAppointments() {
               //     currentAppointment.profile_image,
               //     currentAppointment.id
               //   );
-              if (snapshot.size === index) {
+              if (snapshot.size === index + 1) {
                 populate();
               }
               index++;
