@@ -33,7 +33,7 @@ function getAppointments() {
       ];
       const link = document.querySelectorAll(".appointment-container a")[index];
       image.src = appointment.profile_image;
-      month.innerHTML = appointment.date.toDate().substring(0, 3);
+      month.innerHTML = appointment.date.toDate().substring(4, 7);
       day.innerHTML = appointment.date.toDate().substring(8, 10);
       link.href = "/appointments/appointment?ap=" + appointment.id;
       fullname.innerHTML = appointment.firstname + " " + appointment.lastname;
@@ -67,7 +67,7 @@ function getAppointments() {
               console.log("to date", doc.data().date.toDate());
               console.log(
                 "to date sunbstr",
-                doc.data().toDate().date.substring("", 3)
+                doc.data().date.toDate().substring(0, 3)
               );
               if (snapshot.size === index + 1) {
                 populate();
