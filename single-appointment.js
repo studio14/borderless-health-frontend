@@ -36,12 +36,25 @@ const loadAppointment = () => {
           documents[0].parentNode.appendChild(clone);
           documents[index].setAttribute("href", doc.url);
           if (doc.mimeType !== "application/pdf") {
-            document.querySelectorAll(".patient-img-upload img")[index].src = doc.url;
+            document.querySelectorAll(".patient-img-upload img")[index].src =
+              doc.url;
+            document
+              .querySelectorAll(".patient-img-upload div")
+              [index].setAttribute(
+                "style",
+                "text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 10ch;"
+              );
+            document.querySelectorAll(".patient-img-upload div")[
+              index
+            ].innerHTML = doc.name;
           }
         } else {
           documents[0].setAttribute("href", doc.url);
           if (doc.mimeType !== "application/pdf") {
-            document.querySelectorAll(".patient-img-upload img")[0].src = doc.url;
+            document.querySelectorAll(".patient-img-upload img")[0].src =
+              doc.url;
+            document.querySelectorAll(".patient-img-upload div")[0].innerHTML =
+              doc.name;
           }
         }
       });
