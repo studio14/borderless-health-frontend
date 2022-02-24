@@ -40,7 +40,7 @@ function getAppointments() {
         .get()
         .then((snapshot) => {
           let index = 0;
-          console.log("snapshotttt", snapshot);
+          console.log("snapshotttt", snapshot.size);
           snapshot.forEach((doc) => {
             const appointmenDoc = db
               .collection("test-patients")
