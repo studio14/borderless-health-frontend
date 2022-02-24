@@ -14,10 +14,11 @@ function getAppointments() {
   function populate() {
     var original = document.getElementsByClassName("appointment-container")[0];
     original.setAttribute("style", "display:flex");
+    const previousAppointments = document.querySelector(
+      ".previous-appointment-info"
+    );
     appointments.forEach((appointment, index) => {
-      const previousAppointments = document.querySelector(
-        ".previous-appointment-info"
-      );
+      console.log("appointment", appointment);
       const currentDate = new Date();
       if (appointment.date.toDate() > currentDate) {
         if (index > 0) {
