@@ -11,23 +11,23 @@ function getAppointments() {
 
   let appointments = [];
 
-  function populate(index, firstname, lastname, profile_image, id) {
+  function populate() {
     var original = document.getElementsByClassName("appointment-container")[0];
-    if (index == 0) {
-      original.setAttribute("style", "display:flex");
-    }
-    var clone = original.cloneNode(true); // "deep" clone
-    original.parentNode.appendChild(clone);
-    const image = document.querySelectorAll(".appointment-container img")[
-      index
-    ];
-    const fullname = document.querySelectorAll(
-      ".appointment-container .heading-5"
-    )[index];
-    const link = document.querySelectorAll(".appointment-container a")[index];
-    image.src = profile_image;
-    link.href = "/appointments/appointment?ap=" + id;
-    fullname.innerHTML = firstname + " " + lastname;
+    original.setAttribute("style", "display:flex");
+    appointments.forEach((appointment, index) => {
+      var clone = original.cloneNode(true); // "deep" clone
+      original.parentNode.appendChild(clone);
+      const image = document.querySelectorAll(".appointment-container img")[
+        index
+      ];
+      const fullname = document.querySelectorAll(
+        ".appointment-container .heading-5"
+      )[index];
+      const link = document.querySelectorAll(".appointment-container a")[index];
+      image.src = appointment.profile_image;
+      link.href = "/appointments/appointment?ap=" + appointment.id;
+      fullname.innerHTML = appointment.firstname + " " + appointment.lastname;
+    });
   }
 
   auth.onAuthStateChanged((user) => {
@@ -41,6 +41,10 @@ function getAppointments() {
         .then((snapshot) => {
           let index = 0;
           console.log("snapshotttt", snapshot.size);
+          if (snapshot.size == 0) {
+            const emptyAppointment = document.querySelector(".no-appointment");
+            emptyAppointment.setAttribute("style", "display:block");
+          }
           snapshot.forEach((doc) => {
             const appointmenDoc = db
               .collection("test-patients")
@@ -51,18 +55,21 @@ function getAppointments() {
                 ...doc.data(),
                 ...appointmentSnapshot.data(),
               });
-              const currentAppointment = {
-                id: doc.id,
-                ...doc.data(),
-                ...appointmentSnapshot.data(),
-              };
-              populate(
-                index,
-                currentAppointment.firstname,
-                currentAppointment.lastname,
-                currentAppointment.profile_image,
-                currentAppointment.id
-              );
+              //   const currentAppointment = {
+              //     id: doc.id,
+              //     ...doc.data(),
+              //     ...appointmentSnapshot.data(),
+              //   };
+              //   populate(
+              //     index,
+              //     currentAppointment.firstname,
+              //     currentAppointment.lastname,
+              //     currentAppointment.profile_image,
+              //     currentAppointment.id
+              //   );
+              if (snapshot.size === index) {
+                populate();
+              }
               index++;
             });
           });
