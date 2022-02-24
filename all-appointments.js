@@ -56,7 +56,7 @@ function getAppointments() {
                 ...doc.data(),
                 ...appointmentSnapshot.data(),
               });
-              console.log("to date", doc.data().dob.toDate());
+              console.log("to date", appointmentSnapshot.data().dob.toDate());
               console.log(
                 "to date and to string",
                 doc.data().dob.toDate().toDateString()
