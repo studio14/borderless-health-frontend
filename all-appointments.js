@@ -33,8 +33,8 @@ function getAppointments() {
       ];
       const link = document.querySelectorAll(".appointment-container a")[index];
       image.src = appointment.profile_image;
-      month.innerHTML = appointment.date.toDate().substring(4, 7);
-      day.innerHTML = appointment.date.toDate().substring(8, 10);
+      month.innerHTML = appointment.date.toDate().toString().substring(4, 7);
+      day.innerHTML = appointment.date.toDate().toString().substring(8, 10);
       link.href = "/appointments/appointment?ap=" + appointment.id;
       fullname.innerHTML = appointment.firstname + " " + appointment.lastname;
     });
