@@ -25,7 +25,10 @@ function getAppointments() {
     let previousAppointments = appointments.filter(
       (ap) => ap.date.toDate() < currentDate
     );
-    if (previousAppointments.length === 0) {
+    console.log("upcomingAppointments", upcomingAppointments);
+    console.log("previousAppointments", previousAppointments);
+
+    if (upcomingAppointments.length === 0) {
       const emptyAppointment = document.querySelector(
         ".upcoming-appointment .no-appointments"
       );
