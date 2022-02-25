@@ -46,23 +46,25 @@ function getAppointments() {
         var clone = original.cloneNode(true); // "deep" clone
         original.parentNode.appendChild(clone);
       }
-      const image = document.querySelectorAll(".upcoming-appointment .appointment-container img")[
-        index
-      ];
+      const image = document.querySelectorAll(
+        ".upcoming-appointment .appointment-container img"
+      )[index];
       const fullname = document.querySelectorAll(
         ".appointment-container .heading-5"
       )[index];
-      const day = document.querySelectorAll(".upcoming-appointment .appointment-container .day")[
-        index
-      ];
-      const month = document.querySelectorAll(".upcoming-appointment .appointment-container .month")[
-        index
-      ];
-      const link = document.querySelectorAll(".upcoming-appointment .appointment-container a")[index];
+      const day = document.querySelectorAll(
+        ".upcoming-appointment .appointment-container .day"
+      )[index];
+      const month = document.querySelectorAll(
+        ".upcoming-appointment .appointment-container .month"
+      )[index];
+      const link = document.querySelectorAll(
+        ".upcoming-appointment .appointment-container a"
+      )[index];
       image.src = appointment.profile_image;
       month.innerHTML = appointment.date.toDate().toString().substring(4, 7);
       day.innerHTML = appointment.date.toDate().toString().substring(8, 10);
-      link.href = "/appointments/appointment?ap=" + appointment.id;
+      link.href = `/appointments/appointment?ap=${appointment.id}&t=${appointment.date.toDate() > currentDate ? "up" : "pr" }`;
       fullname.innerHTML = appointment.firstname + " " + appointment.lastname;
     });
     previousAppointments.forEach((appointment, index) => {
@@ -70,19 +72,21 @@ function getAppointments() {
       var clone = original.cloneNode(true); // "deep" clone
       previousAppointmentsParent.appendChild(clone);
 
-      const image = document.querySelectorAll(".previous-appointment .appointment-container img")[
-        index
-      ];
+      const image = document.querySelectorAll(
+        ".previous-appointment .appointment-container img"
+      )[index];
       const fullname = document.querySelectorAll(
         ".appointment-container .heading-5"
       )[index];
-      const day = document.querySelectorAll(".previous-appointment .appointment-container .day")[
-        index
-      ];
-      const month = document.querySelectorAll(".previous-appointment .appointment-container .month")[
-        index
-      ];
-      const link = document.querySelectorAll(".previous-appointment .appointment-container a")[index];
+      const day = document.querySelectorAll(
+        ".previous-appointment .appointment-container .day"
+      )[index];
+      const month = document.querySelectorAll(
+        ".previous-appointment .appointment-container .month"
+      )[index];
+      const link = document.querySelectorAll(
+        ".previous-appointment .appointment-container a"
+      )[index];
       image.src = appointment.profile_image;
       month.innerHTML = appointment.date.toDate().toString().substring(4, 7);
       day.innerHTML = appointment.date.toDate().toString().substring(8, 10);
