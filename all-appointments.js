@@ -64,7 +64,9 @@ function getAppointments() {
       image.src = appointment.profile_image;
       month.innerHTML = appointment.date.toDate().toString().substring(4, 7);
       day.innerHTML = appointment.date.toDate().toString().substring(8, 10);
-      link.href = `/appointments/appointment?ap=${appointment.id}&t=${appointment.date.toDate() > currentDate ? "up" : "pr" }`;
+      link.href = `/appointments/appointment?ap=${appointment.id}&t=${
+        appointment.date.toDate() > currentDate ? "up" : "pr"
+      }`;
       fullname.innerHTML = appointment.firstname + " " + appointment.lastname;
     });
     previousAppointments.forEach((appointment, index) => {
@@ -105,7 +107,9 @@ function getAppointments() {
         .get()
         .then((snapshot) => {
           let index = 0;
+          console.log("snapshot", snapshot);
           snapshot.forEach((doc) => {
+            console.log("doc.data()", doc.data());
             const appointmenDoc = db
               .collection("test-patients")
               .doc(doc.data().patient_uid);
