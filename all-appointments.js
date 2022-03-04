@@ -99,6 +99,7 @@ function getAppointments() {
 
   auth.onAuthStateChanged((user) => {
     if (user) {
+      console.log("rrr: ", user);
       let appointmentRef = db
         .collection("test-appointments")
         .where("patient_uid", "!=", "");
