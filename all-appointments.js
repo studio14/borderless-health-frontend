@@ -5,7 +5,7 @@ function getAppointments() {
   const upcoming_appointment_info = document.getElementById(
     "upcoming-appointment-info"
   );
-
+  const paragraph = document.querySelector(".paragraph");
   inner_page_loader.setAttribute("style", "display:flex");
   upcoming_appointment_info.setAttribute("style", "display:none");
 
@@ -25,8 +25,11 @@ function getAppointments() {
     const previousAppointments = appointments.filter(
       (ap) => ap.date.toDate() < currentDate
     );
-    console.log("upcomingAppointments", upcomingAppointments);
-    console.log("previousAppointments", previousAppointments);
+    paragraph.innerHTML = `Hi Doctor, you have ${
+      upcomingAppointments.length > 1
+        ? upcomingAppointments.length + "new appointments"
+        : upcomingAppointments.length + "new appointment"
+    } scheduled this week`;
 
     if (upcomingAppointments.length === 0) {
       const emptyAppointment = document.querySelector(
@@ -99,7 +102,6 @@ function getAppointments() {
 
   auth.onAuthStateChanged((user) => {
     if (user) {
-      console.log("rrr: ", user);
       let appointmentRef = db
         .collection("test-appointments")
         .where("patient_uid", "!=", "");
@@ -108,9 +110,7 @@ function getAppointments() {
         .get()
         .then((snapshot) => {
           let index = 0;
-          console.log("snapshot", snapshot.size);
           if (snapshot.size === 0) {
-            console.log("logoogogo");
             inner_page_loader.setAttribute("style", "display: none");
             // calendar loader
             document
