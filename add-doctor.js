@@ -7,22 +7,22 @@ Array.prototype.search = function (elem) {
   return -1;
 };
 
-var Multiselect = function (selector) {
-  if (!$(selector)) {
-    console.error("ERROR: Element %s does not exist.", selector);
-    return;
+class Multiselect {
+  constructor(selector) {
+    if (!$(selector)) {
+      console.error("ERROR: Element %s does not exist.", selector);
+      return;
+    }
+    console.log(this.selector);
+
+    this.selector = selector;
+    this.selections = [];
+
+    (function (that) {
+      that.events();
+    })(this);
   }
-
-  this.selector = selector;
-  this.selections = [];
-
-  (function (that) {
-    that.events();
-  })(this);
-};
-
-Multiselect.prototype = {
-  open: function (that) {
+  open(that) {
     var target = $(that).parent().attr("data-target");
 
     // If we are not keeping track of this one's entries, then
@@ -32,13 +32,11 @@ Multiselect.prototype = {
     }
 
     $(this.selector + ".multiselect").toggleClass("active");
-  },
-
-  close: function () {
+  }
+  close() {
     $(this.selector + ".multiselect").removeClass("active");
-  },
-
-  events: function () {
+  }
+  events() {
     var that = this;
 
     $(document).on(
@@ -90,28 +88,24 @@ Multiselect.prototype = {
         }
       }
     });
-  },
-
-  selectionStatus: function () {
+  }
+  selectionStatus() {
     var obj = $(this.selector + ".multiselect");
 
     if (this.selections.length) obj.addClass("selection");
     else obj.removeClass("selection");
-  },
-
-  clearSelections: function () {
+  }
+  clearSelections() {
     this.selections = [];
     this.selectionStatus();
     this.setSelectionsString();
-  },
-
-  getSelections: function () {
+  }
+  getSelections() {
     return this.selections;
-  },
-
-  setSelectionsString: function () {
+  }
+  setSelectionsString() {
     var selects = this.getSelectionsString().split(", ");
-    var input = $(selector + " .multi-input");
+    var input = $(this.selector + " .multi-input");
     console.log("input", input);
     input.setAttribute("value", this.getSelectionsString());
     $(this.selector + ".multiselect > .title").attr("title", selects);
@@ -142,14 +136,12 @@ Multiselect.prototype = {
         }
       }
     }
-  },
-
-  getSelectionsString: function () {
+  }
+  getSelectionsString() {
     if (this.selections.length > 0) return this.selections.join(", ");
     else return "Select";
-  },
-
-  setSelections: function (arr) {
+  }
+  setSelections(arr) {
     if (!arr[0]) {
       error("ERROR: This does not look like an array.");
       return;
@@ -158,8 +150,8 @@ Multiselect.prototype = {
     this.selections = arr;
     this.selectionStatus();
     this.setSelectionsString();
-  },
-};
+  }
+}
 
 $(document).ready(function () {
   var multi = new Multiselect("#specialities");
