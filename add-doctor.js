@@ -1,5 +1,4 @@
 // For speciality multi-select
-const specialityInput = document.querySelector("#speciality-input");
 Array.prototype.search = function (elem) {
   for (var i = 0; i < this.length; i++) {
     if (this[i] == elem) return i;
@@ -112,7 +111,8 @@ Multiselect.prototype = {
 
   setSelectionsString: function () {
     var selects = this.getSelectionsString().split(", ");
-    specialityInput.setAttribute("value", this.getSelectionsString());
+    var input = $(this.selector + ".multi-input");
+    input.setAttribute("value", this.getSelectionsString());
     $(this.selector + ".multiselect > .title").attr("title", selects);
 
     var opts = $(this.selector + ".multiselect option");
@@ -161,5 +161,6 @@ Multiselect.prototype = {
 };
 
 $(document).ready(function () {
-  var multi = new Multiselect("#countries");
+  var multi = new Multiselect("#specialities");
+  var multiLanguage = new Multiselect("#languages");
 });
