@@ -108,7 +108,7 @@ function getAppointments() {
         .get()
         .then((snapshot) => {
           let index = 0;
-          console.log("snapshot", snapshot.length);
+          console.log("snapshot", snapshot.numChildren());
           if (snapshot.length === 0) {
             console.log("logoogogo");
             inner_page_loader.setAttribute("style", "display: none");
