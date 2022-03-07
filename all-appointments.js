@@ -27,8 +27,8 @@ function getAppointments() {
     );
     paragraph.innerHTML = `Hi Doctor, you have ${
       upcomingAppointments.length > 1
-        ? upcomingAppointments.length + "new appointments"
-        : upcomingAppointments.length + "new appointment"
+        ? upcomingAppointments.length + " new appointments"
+        : upcomingAppointments.length + " new appointment"
     } scheduled this week`;
 
     if (upcomingAppointments.length === 0) {
