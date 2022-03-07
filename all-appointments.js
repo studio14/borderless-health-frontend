@@ -112,13 +112,18 @@ function getAppointments() {
           if (snapshot.size === 0) {
             console.log("logoogogo");
             inner_page_loader.setAttribute("style", "display: none");
-            
-            document.querySelector(
-              ".upcoming-appointment .no-appointments"
-            ).setAttribute("style", "display:block");
-            document.querySelector(
-              ".previous-appointment .no-appointments"
-            ).setAttribute("style", "display:block");
+            // calendar loader
+            document
+              .querySelector("#calendar-appointment .inner-loader-class")
+              .setAttribute("style", "display: none");
+            //upcoming no appointment
+            document
+              .querySelector(".upcoming-appointment .no-appointments")
+              .setAttribute("style", "display:block");
+            //previous no appointment
+            document
+              .querySelector(".previous-appointment .no-appointments")
+              .setAttribute("style", "display:block");
           }
           snapshot.forEach((doc) => {
             console.log("doc.data()", doc.data());
