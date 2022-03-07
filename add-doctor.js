@@ -13,7 +13,6 @@ class Multiselect {
       console.error("ERROR: Element %s does not exist.", selector);
       return;
     }
-    console.log(this.selector);
 
     this.selector = selector;
     this.selections = [];
@@ -106,7 +105,6 @@ class Multiselect {
   setSelectionsString() {
     var selects = this.getSelectionsString().split(", ");
     var input = $(this.selector + " .multi-input")[0];
-    console.log("input", input);
     input.setAttribute("value", this.getSelectionsString());
     $(this.selector + ".multiselect > .title").attr("title", selects);
 
