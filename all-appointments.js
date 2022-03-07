@@ -112,10 +112,13 @@ function getAppointments() {
           if (snapshot.size === 0) {
             console.log("logoogogo");
             inner_page_loader.setAttribute("style", "display: none");
-            const emptyAppointment = document.querySelector(
+            
+            document.querySelector(
               ".upcoming-appointment .no-appointments"
-            );
-            emptyAppointment.setAttribute("style", "display:block");
+            ).setAttribute("style", "display:block");
+            document.querySelector(
+              ".previous-appointment .no-appointments"
+            ).setAttribute("style", "display:block");
           }
           snapshot.forEach((doc) => {
             console.log("doc.data()", doc.data());
