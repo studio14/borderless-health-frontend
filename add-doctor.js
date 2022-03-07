@@ -105,7 +105,7 @@ class Multiselect {
   }
   setSelectionsString() {
     var selects = this.getSelectionsString().split(", ");
-    var input = $(this.selector + " .multi-input");
+    var input = $(this.selector + " .multi-input")[0];
     console.log("input", input);
     input.setAttribute("value", this.getSelectionsString());
     $(this.selector + ".multiselect > .title").attr("title", selects);
