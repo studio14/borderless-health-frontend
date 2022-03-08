@@ -9,6 +9,7 @@ const loadAppointment = () => {
 
   const params = new URLSearchParams(location.search);
   const apQuery = params.get("ap");
+  const appointmentTime = params.get("t");
 
   const patientName = document.querySelector(".patient-name");
   const dob = document.querySelector(".patient-dob");
@@ -18,6 +19,23 @@ const loadAppointment = () => {
   const meetingLink = document.querySelector(".meeting-link");
   const documents = document.querySelectorAll(".patient-img-upload");
   const appointment = db.collection("test-appointments").doc(apQuery);
+
+  // To display upcoming or previous appointment
+  const upcomingAp = document.querySelector('.tab-link-tab-1')
+  const prevAp = document.querySelector('.tab-link-tab-2')
+  if(appointmentTime === "pr"){
+    upcomingAp.setAttribute("aria-selected", "false")
+    upcomingAp.setAttribute("tabindex", "-1")
+    upcomingAp.classList.remove('w--current')
+
+    prevAp.setAttribute("aria-selected", "true")
+    prevAp.classList.add('w--current')
+
+  } else if(appointmentTime === "up") {
+
+  }
+
+  // To fetch appointment details
   appointment.get().then((snapshot) => {
     const result = snapshot.data();
     const patient = db.collection("test-patients").doc(result.patient_uid);
