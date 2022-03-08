@@ -28,8 +28,11 @@ const loadAppointment = () => {
     upcomingAp.setAttribute("aria-selected", "false");
     upcomingAp.setAttribute("tabindex", "-1");
     upcomingAp.classList.remove("w--current");
-    upcomingAp.setAttribute("href", "https://borderless-health-doctors-side.webflow.io/appointments/all");
-    $(".tab-link-tab-1").off('click')
+    upcomingAp.setAttribute(
+      "href",
+      "https://borderless-health-doctors-side.webflow.io/appointments/all"
+    );
+    upcomingAp.onclick = null;
 
     prevAp.setAttribute("aria-selected", "true");
     prevAp.classList.add("w--current");
@@ -37,8 +40,11 @@ const loadAppointment = () => {
     prevAp.setAttribute("aria-selected", "false");
     prevAp.setAttribute("tabindex", "-1");
     prevAp.classList.remove("w--current");
-    prevAp.setAttribute("href", "https://borderless-health-doctors-side.webflow.io/appointments/all");
-    $(".tab-link-tab-2").off('click')
+    prevAp.setAttribute(
+      "href",
+      "https://borderless-health-doctors-side.webflow.io/appointments/all"
+    );
+    prevAp.onclick = null;
 
     upcomingAp.setAttribute("aria-selected", "true");
     upcomingAp.classList.add("w--current");
@@ -104,8 +110,11 @@ const loadAppointment = () => {
       .catch((error) => {
         console.log("error: ", error);
         document
-          .querySelectorAll(".error-text")[appointmentTime === "up" ? 0 : 1]
-          .setAttribute("style", "display:block");
+          .querySelectorAll(".error-text")
+          [appointmentTime === "up" ? 0 : 1].setAttribute(
+            "style",
+            "display:block"
+          );
       });
   });
 };
