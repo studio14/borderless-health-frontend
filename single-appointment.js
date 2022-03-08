@@ -28,10 +28,18 @@ const loadAppointment = () => {
     upcomingAp.setAttribute("aria-selected", "false");
     upcomingAp.setAttribute("tabindex", "-1");
     upcomingAp.classList.remove("w--current");
+    upcomingAp.setAttribute("href", "/appointments/all");
 
     prevAp.setAttribute("aria-selected", "true");
     prevAp.classList.add("w--current");
   } else if (appointmentTime === "up") {
+    prevAp.setAttribute("aria-selected", "false");
+    prevAp.setAttribute("tabindex", "-1");
+    prevAp.classList.remove("w--current");
+    prevAp.setAttribute("href", "/appointments/all");
+
+    upcomingAp.setAttribute("aria-selected", "true");
+    upcomingAp.classList.add("w--current");
   }
 
   // To fetch appointment details
@@ -93,6 +101,9 @@ const loadAppointment = () => {
       })
       .catch((error) => {
         console.log("error: ", error);
+        document
+          .querySelector(".error-text")
+          .setAttribute("style", "display:block");
       });
   });
 };
