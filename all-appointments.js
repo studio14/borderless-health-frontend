@@ -95,7 +95,9 @@ function getAppointments() {
       image.src = appointment.profile_image;
       month.innerHTML = appointment.date.toDate().toString().substring(4, 7);
       day.innerHTML = appointment.date.toDate().toString().substring(8, 10);
-      link.href = "/appointments/appointment?ap=" + appointment.id;
+      link.href = `/appointments/appointment?ap=${appointment.id}&t=${
+        appointment.date.toDate() > currentDate ? "up" : "pr"
+      }`;
       fullname.innerHTML = appointment.firstname + " " + appointment.lastname;
     });
   }
