@@ -104,7 +104,7 @@ const loadAppointment = () => {
       .catch((error) => {
         console.log("error: ", error);
         document
-          .querySelector(".error-text")[appointmentTime === "up" ? 0 : 1]
+          .querySelectorAll(".error-text")[appointmentTime === "up" ? 0 : 1]
           .setAttribute("style", "display:block");
       });
   });
