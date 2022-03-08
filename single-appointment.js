@@ -21,18 +21,17 @@ const loadAppointment = () => {
   const appointment = db.collection("test-appointments").doc(apQuery);
 
   // To display upcoming or previous appointment
-  const upcomingAp = document.querySelector('.tab-link-tab-1')
-  const prevAp = document.querySelector('.tab-link-tab-2')
-  if(appointmentTime === "pr"){
-    upcomingAp.setAttribute("aria-selected", "false")
-    upcomingAp.setAttribute("tabindex", "-1")
-    upcomingAp.classList.remove('w--current')
+  const upcomingAp = document.querySelector(".tab-link-tab-1");
+  const prevAp = document.querySelector(".tab-link-tab-2");
+  console.log("oya ooo", appointmentTime, upcomingAp, prevAp);
+  if (appointmentTime === "pr") {
+    upcomingAp.setAttribute("aria-selected", "false");
+    upcomingAp.setAttribute("tabindex", "-1");
+    upcomingAp.classList.remove("w--current");
 
-    prevAp.setAttribute("aria-selected", "true")
-    prevAp.classList.add('w--current')
-
-  } else if(appointmentTime === "up") {
-
+    prevAp.setAttribute("aria-selected", "true");
+    prevAp.classList.add("w--current");
+  } else if (appointmentTime === "up") {
   }
 
   // To fetch appointment details
