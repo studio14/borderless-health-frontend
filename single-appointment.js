@@ -21,8 +21,8 @@ const loadAppointment = () => {
   const appointment = db.collection("test-appointments").doc(apQuery);
 
   // To display upcoming or previous appointment
-  const upcomingAp = document.querySelector(".tab-link-tab-1");
-  const prevAp = document.querySelector(".tab-link-tab-2");
+  const upcomingAp = document.querySelector("#w-tabs-0-data-w-tab-0");
+  const prevAp = document.querySelector("#w-tabs-0-data-w-tab-1");
   console.log("oya ooo", appointmentTime, upcomingAp, prevAp);
   if (appointmentTime === "pr") {
     upcomingAp.setAttribute("aria-selected", "false");
