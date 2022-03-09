@@ -28,7 +28,7 @@ const loadAppointment = () => {
     upcomingAp.setAttribute("aria-selected", "false");
     upcomingAp.setAttribute("tabindex", "-1");
     upcomingAp.classList.remove("w--current");
-    upcomingAp.oaddEventListener('click', () => {
+    upcomingAp.addEventListener('click', () => {
       window.location = "https://borderless-health-doctors-side.webflow.io/appointments/all"
     })
 
