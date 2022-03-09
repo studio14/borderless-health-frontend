@@ -28,9 +28,7 @@ const loadAppointment = () => {
     upcomingAp.setAttribute("aria-selected", "false");
     upcomingAp.setAttribute("tabindex", "-1");
     upcomingAp.classList.remove("w--current");
-    upcomingAp.href =
-      "https://borderless-health-doctors-side.webflow.io/appointments/all";
-    upcomingAp.onclick = null;
+    upcomingAp.onclick = "location.href='https://borderless-health-doctors-side.webflow.io/appointments/all";;
 
     prevAp.setAttribute("aria-selected", "true");
     prevAp.classList.add("w--current");
@@ -38,9 +36,7 @@ const loadAppointment = () => {
     prevAp.setAttribute("aria-selected", "false");
     prevAp.setAttribute("tabindex", "-1");
     prevAp.classList.remove("w--current");
-    prevAp.href =
-      "https://borderless-health-doctors-side.webflow.io/appointments/all";
-    prevAp.onclick = null;
+    prevAp.onclick = "location.href='https://borderless-health-doctors-side.webflow.io/appointments/all";
 
     upcomingAp.setAttribute("aria-selected", "true");
     upcomingAp.classList.add("w--current");
