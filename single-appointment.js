@@ -18,7 +18,6 @@ const loadAppointment = () => {
   const BackgroundInfo = document.querySelector(".patient-bg-info");
   const meetingLink = document.querySelector(".meeting-link");
   const documents = document.querySelectorAll(".patient-img-upload");
-  const appointment = db.collection("test-appointments").doc(apQuery);
 
   // To display upcoming or previous appointment
   const upcomingAp = document.querySelector(".tab-link-tab-1");
@@ -47,6 +46,7 @@ const loadAppointment = () => {
   }
 
   // To fetch appointment details
+  const appointment = db.collection("test-appointments").doc(apQuery);
   appointment.get().then((snapshot) => {
     const result = snapshot.data();
     const patient = db.collection("test-patients").doc(result.patient_uid);
